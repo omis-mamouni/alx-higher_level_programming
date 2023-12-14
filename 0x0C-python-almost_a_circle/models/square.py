@@ -1,47 +1,38 @@
 #!/usr/bin/python3
-"""Define the Square class that inherits from Rectangle"""
+
+"""
+Module: `square`
+"""
+
+
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """Definition of Square class that inherits from Rectangle
-
-    Attributes:
-        id: square identifier
-        size: square size
-        x, y: square position
-    """
+    """Class: `Square`"""
     def __init__(self, size, x=0, y=0, id=None):
-        """initialise Square attributes"""
+        """Init method"""
         super().__init__(size, size, x, y, id)
 
     def __str__(self):
-        """Returns a string representation of a square"""
-        return "[Square] (" + str(self.id) + ") " + str(self.x) + "/" \
-            + str(self.y) + " - " + str(self.width)
+        """Str method"""
+        return "[Square] ({}) {}/{} - {}".format(
+            self.id, self.x, self.y, self.width)
 
     @property
     def size(self):
-        """getter of the square size"""
+        """Getter for size"""
         return self.width
 
     @size.setter
     def size(self, value):
-        """setter of the square size"""
+        """Setter for size"""
         self.width = value
         self.height = value
 
     def update(self, *args, **kwargs):
-        """that assigns attributes:
-        *args is the list of arguments - no-keyworded arguments:
-            1st argument should be the id attribute
-            2nd argument should be the size attribute
-            3rd argument should be the x attribute
-            4th argument should be the y attribute
-        **kwargs can be thought of as a double pointer to a
-        dictionary: key/value (keyworded arguments)
-        """
-        if args is not None and len(args) != 0:
+        """Update method"""
+        if args:
             attrs = ["id", "size", "x", "y"]
             for i in range(len(args)):
                 setattr(self, attrs[i], args[i])
@@ -50,7 +41,5 @@ class Square(Rectangle):
                 setattr(self, key, value)
 
     def to_dictionary(self):
-        """returns the dictionary representation of a Square"""
-        attrs = ["id", "size", "x", "y"]
-        return {attr: getattr(self, attr) for attr in attrs}
-
+        """To dictionary method"""
+        return {"id": self.id, "size": self.size, "x": self.x, "y": self.y}
